@@ -45,17 +45,36 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // --------------------------------------------------------------------------
-  // Mobile Offcanvas Drawer Native Bootstrap Management
+  // Mobile Offcanvas Drawer Link Navigation & Dismissal Engine
   // --------------------------------------------------------------------------
   const mobileDrawerEl = document.getElementById('lpMobileDrawer');
   if (mobileDrawerEl) {
-    // Smoothly close drawer when navigation links inside drawer are clicked
     mobileDrawerEl.querySelectorAll('a[href]').forEach(function (link) {
-      link.addEventListener('click', function () {
+      link.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+
+        // Hide offcanvas drawer smoothly
         if (window.bootstrap && bootstrap.Offcanvas) {
           const bsDrawer = bootstrap.Offcanvas.getInstance(mobileDrawerEl) || bootstrap.Offcanvas.getOrCreateInstance(mobileDrawerEl);
           if (bsDrawer) {
             bsDrawer.hide();
+          }
+        }
+
+        // Handle section hash scrolling smoothly
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          const targetEl = href === '#' ? null : document.querySelector(href);
+          if (targetEl) {
+            setTimeout(function () {
+              const navEl = document.getElementById('lpNav');
+              const navHeight = navEl ? navEl.offsetHeight : 80;
+              const targetPosition = targetEl.offsetTop - navHeight;
+              window.scrollTo({
+                top: Math.max(0, targetPosition),
+                behavior: 'smooth'
+              });
+            }, 150);
           }
         }
       });

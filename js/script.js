@@ -289,33 +289,52 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function applyFiltersAndPagination() {
-      const filteredItems = allItems.filter((item) => {
-        const textContent = (item.textContent || "").toLowerCase();
-        const matchesSearch = !currentSearchQuery || textContent.includes(currentSearchQuery.toLowerCase());
+      let maxTotalCount = 0;
+      const validContainers = itemsContainers.filter(Boolean);
+      if (validContainers.length === 0) return;
 
-        const itemStatus = item.getAttribute("data-status") || "";
-        const matchesStatus = currentStatusFilter === "all" || itemStatus === currentStatusFilter;
-
-        return matchesSearch && matchesStatus;
+      validContainers.forEach((container) => {
+        const children = Array.from(container.children);
+        const filtered = children.filter((item) => {
+          const textContent = (item.textContent || "").toLowerCase();
+          const matchesSearch = !currentSearchQuery || textContent.includes(currentSearchQuery.toLowerCase());
+          const itemStatus = item.getAttribute("data-status") || "";
+          const matchesStatus = currentStatusFilter === "all" || itemStatus === currentStatusFilter;
+          return matchesSearch && matchesStatus;
+        });
+        if (filtered.length > maxTotalCount) {
+          maxTotalCount = filtered.length;
+        }
       });
 
-      const totalCount = filteredItems.length;
-      const totalPages = Math.ceil(totalCount / itemsPerPage) || 1;
+      const totalPages = Math.ceil(maxTotalCount / itemsPerPage) || 1;
 
       if (currentPage > totalPages) currentPage = totalPages;
       if (currentPage < 1) currentPage = 1;
 
       const startIndex = (currentPage - 1) * itemsPerPage;
-      const endIndex = Math.min(startIndex + itemsPerPage, totalCount);
+      const endIndex = Math.min(startIndex + itemsPerPage, maxTotalCount);
 
-      allItems.forEach((item) => { item.style.display = "none"; });
-      filteredItems.slice(startIndex, endIndex).forEach((item) => {
-        item.style.display = "";
+      validContainers.forEach((container) => {
+        const children = Array.from(container.children);
+        const filtered = children.filter((item) => {
+          const textContent = (item.textContent || "").toLowerCase();
+          const matchesSearch = !currentSearchQuery || textContent.includes(currentSearchQuery.toLowerCase());
+          const itemStatus = item.getAttribute("data-status") || "";
+          const matchesStatus = currentStatusFilter === "all" || itemStatus === currentStatusFilter;
+          return matchesSearch && matchesStatus;
+        });
+
+        const activeSlice = filtered.slice(startIndex, endIndex);
+
+        children.forEach((item) => {
+          item.style.display = activeSlice.includes(item) ? "" : "none";
+        });
       });
 
-      if (showingStartEl) showingStartEl.textContent = totalCount > 0 ? startIndex + 1 : 0;
+      if (showingStartEl) showingStartEl.textContent = maxTotalCount > 0 ? startIndex + 1 : 0;
       if (showingEndEl) showingEndEl.textContent = endIndex;
-      if (totalCountEl) totalCountEl.textContent = totalCount;
+      if (totalCountEl) totalCountEl.textContent = maxTotalCount;
 
       if (prevBtn) {
         prevBtn.disabled = currentPage <= 1;
@@ -423,6 +442,7 @@ document.addEventListener("DOMContentLoaded", () => {
       text: "تم إيداع مبلغ 444.36 ر.س أرباح الطلب #ORD-98211 في حسابك البنكي.",
       time: "منذ 10 د",
       icon: "fa-solid fa-coins",
+      iconColor: "text-success",
       iconBgClass: "bg-success-subtle text-success",
       link: "account.html",
       unread: true
@@ -433,6 +453,7 @@ document.addEventListener("DOMContentLoaded", () => {
       text: "تم اعتماد وتوثيق عقد التوكيل للطلب #ORD-98402 بنجاح.",
       time: "منذ ساعة",
       icon: "fa-solid fa-file-contract",
+      iconColor: "text-primary",
       iconBgClass: "bg-primary-subtle text-primary",
       link: "contract.html",
       unread: true
@@ -443,6 +464,7 @@ document.addEventListener("DOMContentLoaded", () => {
       text: "تم استلام طلب حجز أيفون 17 برو ماكس بنجاح وهو قيد المعالجة.",
       time: "منذ 3 ساعات",
       icon: "fa-solid fa-box-check",
+      iconColor: "text-info",
       iconBgClass: "bg-info-subtle text-info",
       link: "orders.html",
       unread: true
@@ -453,6 +475,7 @@ document.addEventListener("DOMContentLoaded", () => {
       text: "تم التوثيق وتأكيد بيانات الايبان SA0380000000608010167519 بنجاح.",
       time: "أمس",
       icon: "fa-solid fa-user-shield",
+      iconColor: "text-secondary",
       iconBgClass: "bg-secondary-subtle text-secondary",
       link: "profile.html",
       unread: false
@@ -591,32 +614,36 @@ document.addEventListener("DOMContentLoaded", () => {
           fullListContainer.innerHTML = visibleNotifs
             .map(
               (n) => `
-            <div class="notif-card-item ${n.unread ? "unread-card" : ""} p-3.5 p-md-4 mb-3 border rounded-4 bg-white shadow-sm position-relative" data-notif-id="${n.id}">
+            <div class="notif-card-item ${n.unread ? "unread-card" : ""} mb-3 p-3.5 position-relative" data-notif-id="${n.id}" style="padding: 18px 20px !important;">
               <div class="d-flex align-items-start gap-3">
-                <div class="notif-card-icon ${n.iconBgClass} rounded-4 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 48px; height: 48px;">
-                  <i class="${n.icon} fs-5"></i>
+                <!-- Clean Icon Without Background Card -->
+                <div class="notif-icon-standalone flex-shrink-0 pt-1">
+                  <i class="${n.icon} ${n.iconColor || 'text-primary'}" style="font-size: 1.35rem;"></i>
                 </div>
-                
-                <div class="flex-grow-1 pe-md-2">
-                  <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-1.5">
+                <!-- Card Body -->
+                <div class="flex-grow-1">
+                  <!-- Header row: title + status badge + time badge + dismiss button -->
+                  <div class="d-flex align-items-center justify-content-between gap-2 mb-2 flex-wrap">
                     <div class="d-flex align-items-center gap-2">
-                      <h6 class="fw-bold text-dark mb-0 fs-6">${n.title}</h6>
-                      ${n.unread ? '<span class="badge bg-primary text-white rounded-pill fs-8 px-2 py-1">جديد</span>' : ''}
+                      <span class="fw-bold text-dark fs-6">${n.title}</span>
+                      ${n.unread ? '<span class="badge rounded-pill px-2.5 py-1" style="background:#e0f2fe;color:#0284c7;font-size:11px;font-weight:600;">جديد</span>' : ''}
                     </div>
-                    
-                    <div class="d-flex align-items-center gap-2 ms-auto">
-                      <span class="text-muted fs-8 bg-light border px-2.5 py-1 rounded-pill"><i class="fa-regular fa-clock me-1"></i>${n.time}</span>
-                      <button type="button" class="btn btn-sm btn-light text-muted rounded-circle p-0 d-flex align-items-center justify-content-center notif-single-dismiss" data-dismiss-id="${n.id}" title="حذف التنبيه" style="width: 30px; height: 30px;">
-                        <i class="fa-solid fa-xmark fs-7"></i>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="text-muted d-inline-flex align-items-center gap-1.5 px-3 py-1 bg-light border rounded-pill" style="font-size:11.5px; font-weight:500;">
+                        <i class="fa-regular fa-clock text-secondary" style="font-size:10.5px;"></i>
+                        ${n.time}
+                      </span>
+                      <button type="button" class="btn btn-sm p-1 border-0 text-muted notif-single-dismiss" data-dismiss-id="${n.id}" title="حذف التنبيه" style="opacity:0.5; font-size:14px; line-height:1;">
+                        <i class="fa-solid fa-xmark"></i>
                       </button>
                     </div>
                   </div>
-                  
-                  <p class="text-secondary fs-7 mb-2.5 leading-relaxed">${n.text}</p>
-                  
-                  <a href="${n.link}" class="btn btn-sm btn-light-primary fw-semibold fs-7 rounded-pill px-3 py-1.5 text-decoration-none d-inline-flex align-items-center gap-1.5">
-                    <span>عرض التفاصيل والتأكيد</span>
-                    <i class="fa-solid fa-arrow-left fs-8"></i>
+                  <!-- Body text -->
+                  <p class="text-secondary mb-3 line-clamp-2" style="font-size:13px; line-height:1.55; color: #475569;">${n.text}</p>
+                  <!-- Action link button -->
+                  <a href="${n.link}" class="btn btn-notif-action d-inline-flex align-items-center gap-2 text-decoration-none px-3 py-1.5 rounded-pill text-primary fw-semibold" style="font-size:12px; background: #f0f9ff; border: 1px solid #bae6fd; transition: all 0.2s ease;">
+                    <span>عرض التفاصيل</span>
+                    <i class="fa-solid fa-arrow-left" style="font-size:10px;"></i>
                   </a>
                 </div>
               </div>

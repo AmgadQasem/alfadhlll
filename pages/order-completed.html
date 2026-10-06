@@ -97,77 +97,21 @@
         <li><a href="profile.html" class="home-nav-link"><i class="fa-solid fa-user-gear"></i><span>ملفي</span></a></li>
       </ul>
 
-      <!-- LEFT (RTL-end): Controls (Notifications + Logout Button + Mobile Hamburger) -->
+      <!-- LEFT (RTL-end): Controls (Cart + Bell + Circular Logout Button) -->
       <div class="home-nav-left-controls">
-        <!-- Notifications Dropdown -->
-        <div class="dropdown notifications-dropdown-wrapper">
-          <button class="nav-bell-icon dropdown-toggle border-0 p-0" type="button" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false" title="الإشعارات">
-            <i class="fa-regular fa-bell"></i>
-            <span class="nav-bell-dot" id="navBellDot"></span>
-          </button>
-          <div class="dropdown-menu dropdown-menu-end notifications-dropdown-menu shadow-lg p-0 border-0" aria-labelledby="notificationsDropdown">
-            <div class="notifications-header p-3 border-bottom d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center gap-2">
-                <h6 class="mb-0 fw-bold text-dark fs-6">الإشعارات</h6>
-                <span class="badge bg-primary-subtle text-primary rounded-pill fs-7 px-2" id="notifBadgeCount">3 جديد</span>
-              </div>
-              <button type="button" class="btn btn-link text-decoration-none p-0 fs-7 text-muted mark-all-read-btn" id="markAllReadBtn">تحديد الكل كمعاين</button>
-            </div>
-            <div class="notifications-body custom-scroll" style="max-height: 320px; overflow-y: auto;">
-              <a href="account.html" class="notification-item unread d-flex align-items-start gap-3 p-3 border-bottom text-decoration-none">
-                <div class="notif-icon bg-success-subtle text-success rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 38px; height: 38px;">
-                  <i class="fa-solid fa-coins fs-6"></i>
-                </div>
-                <div class="notif-content flex-grow-1">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <span class="fw-bold text-dark fs-7">تم إيداع أرباحك</span>
-                    <span class="text-muted fs-7">منذ 10 د</span>
-                  </div>
-                  <p class="text-muted fs-7 mb-0">تم إيداع مبلغ 444.36 ر.س أرباح الطلب #ORD-98211 في حسابك البنكي.</p>
-                </div>
-              </a>
-              <a href="contract.html" class="notification-item unread d-flex align-items-start gap-3 p-3 border-bottom text-decoration-none">
-                <div class="notif-icon bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 38px; height: 38px;">
-                  <i class="fa-solid fa-file-contract fs-6"></i>
-                </div>
-                <div class="notif-content flex-grow-1">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <span class="fw-bold text-dark fs-7">توثيق العقد الرقمي</span>
-                    <span class="text-muted fs-7">منذ ساعة</span>
-                  </div>
-                  <p class="text-muted fs-7 mb-0">تم اعتماد وتوثيق عقد التوكيل للطلب #ORD-98402 بنجاح.</p>
-                </div>
-              </a>
-              <a href="orders.html" class="notification-item unread d-flex align-items-start gap-3 p-3 border-bottom text-decoration-none">
-                <div class="notif-icon bg-info-subtle text-info rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 38px; height: 38px;">
-                  <i class="fa-solid fa-box-check fs-6"></i>
-                </div>
-                <div class="notif-content flex-grow-1">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <span class="fw-bold text-dark fs-7">تأكيد الحجز</span>
-                    <span class="text-muted fs-7">منذ 3 ساعات</span>
-                  </div>
-                  <p class="text-muted fs-7 mb-0">تم استلام طلب حجز أيفون 17 برو ماكس بنجاح وهو قيد المعالجة.</p>
-                </div>
-              </a>
-              <a href="profile.html" class="notification-item d-flex align-items-start gap-3 p-3 text-decoration-none">
-                <div class="notif-icon bg-secondary-subtle text-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 38px; height: 38px;">
-                  <i class="fa-solid fa-user-shield fs-6"></i>
-                </div>
-                <div class="notif-content flex-grow-1">
-                  <div class="d-flex align-items-center justify-content-between mb-1">
-                    <span class="fw-bold text-dark fs-7">تحديث الحساب البنكي</span>
-                    <span class="text-muted fs-7">أمس</span>
-                  </div>
-                  <p class="text-muted fs-7 mb-0">تم التوثيق وتأكيد بيانات الايبان SA0380000000608010167519 بنجاح.</p>
-                </div>
-              </a>
-            </div>
-            <div class="notifications-footer p-2.5 text-center border-top bg-light rounded-bottom-4">
-              <a href="orders.html" class="text-primary fw-semibold fs-7 text-decoration-none">عرض كافة السجلات والتحديثات</a>
-            </div>
-          </div>
-        </div>
+        <!-- Cart Icon Link -->
+        <a href="cart.html" class="nav-bell-icon text-decoration-none border-0 p-0 position-relative" title="سلة التسوق" aria-label="سلة التسوق">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="nav-cart-badge" id="navCartBadgeCount">2</span>
+        </a>
+
+        <!-- Notifications Direct Link -->
+        <a href="notifications.html" class="nav-bell-icon text-decoration-none border-0 p-0 position-relative" title="الإشعارات">
+          <i class="fa-regular fa-bell"></i>
+          <span class="nav-bell-dot" id="navBellDot"></span>
+        </a>
+
+        <!-- Logout Link -->
         <a href="../index.html" class="nav-logout-icon" title="تسجيل الخروج" aria-label="تسجيل الخروج">
           <i class="fa-solid fa-right-from-bracket"></i>
         </a>

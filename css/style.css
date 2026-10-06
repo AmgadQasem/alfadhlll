@@ -630,15 +630,16 @@ textarea {
   background-color: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  padding: 8px 24px;
+  padding: 4px 24px !important;
   color: #0f172a;
-  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05);
   border: none !important;
-  border-bottom: none !important;
+  border-bottom: 1px solid #f1f5f9 !important;
   position: sticky;
   top: 0;
   z-index: 1000;
   transition: all 0.2s ease;
+  min-height: 56px !important;
 }
 
 .home-nav-container {
@@ -665,16 +666,16 @@ textarea {
 }
 
 .home-brand-logo-wrapper {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
   background: #f0f9ff;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px;
+  padding: 4px;
   border: 1px solid #bae6fd;
-  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.12);
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.1);
   transition: transform 0.2s ease;
 }
 
@@ -723,14 +724,14 @@ textarea {
 .home-nav-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   color: #475569;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.2s ease;
-  padding: 8px 14px;
-  border-radius: 10px;
+  padding: 5px 12px;
+  border-radius: 8px;
   border: 1px solid transparent;
 }
 
@@ -766,63 +767,80 @@ textarea {
 .logout-nav-btn,
 .nav-logout-icon {
   position: relative;
-  width: 40px;
-  height: 40px;
-  border-radius: 11px;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ef4444;
   font-size: 15px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
   text-decoration: none !important;
+  padding: 0 !important;
 }
 
 .logout-nav-btn:hover,
 .nav-logout-icon:hover {
-  color: #ffffff;
-  background: #ef4444;
-  border-color: #ef4444;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+  color: #dc2626;
+  background: transparent !important;
+  transform: scale(1.15);
 }
 
 .nav-bell-icon {
   position: relative;
-  width: 40px;
-  height: 40px;
-  border-radius: 11px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #475569;
-  font-size: 16px;
+  color: #334155;
+  font-size: 15px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
+  padding: 0 !important;
+  text-decoration: none !important;
+}
+
+/* Suppress any Bootstrap active/focus border on icon anchors */
+.nav-bell-icon:focus,
+.nav-bell-icon:focus-visible,
+.nav-bell-icon.active {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  text-decoration: none !important;
 }
 
 .nav-bell-icon:hover {
   color: #0284c7;
-  background: #f0f9ff;
-  border-color: #bae6fd;
-  transform: translateY(-1px);
+  background: transparent !important;
+  transform: scale(1.12);
+  text-decoration: none !important;
 }
 
 .nav-bell-dot {
   position: absolute;
-  top: 9px;
-  right: 9px;
-  width: 8px;
-  height: 8px;
+  top: 2px;
+  right: 2px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #ef4444;
-  box-shadow: 0 0 8px #ef4444;
+  box-shadow: 0 0 5px #ef4444;
   border: 1.5px solid #ffffff;
+  pointer-events: none;
 }
 
 .nav-bell-icon.dropdown-toggle::after {
@@ -864,6 +882,56 @@ textarea {
 
 .notification-item.unread:hover {
   background: #e0f2fe;
+}
+
+/* ── Full Notifications Page Card Styles ── */
+.notif-card-item {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  background: #ffffff !important;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04) !important;
+}
+
+.notif-card-item:hover {
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.09) !important;
+  transform: translateY(-1px);
+}
+
+.notif-card-item.unread-card {
+  border-color: #bae6fd !important;
+  background: #ffffff !important;
+}
+
+.notif-card-icon-col {
+  border-radius: 0 !important;
+}
+
+/* RTL: icon column on the right side */
+[dir="rtl"] .notif-card-item .rounded-start-4 {
+  border-radius: 0 16px 16px 0 !important;
+}
+
+.notif-card-item .notif-single-dismiss:hover {
+  opacity: 1 !important;
+  color: #ef4444 !important;
+}
+
+.btn-notif-action {
+  background: #f0f9ff !important;
+  border: 1px solid #bae6fd !important;
+  color: #0284c7 !important;
+  border-radius: 50px !important;
+  font-weight: 700 !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-notif-action:hover {
+  background: #0284c7 !important;
+  border-color: #0284c7 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25) !important;
 }
 
 .notif-tab-btn {
@@ -918,7 +986,7 @@ textarea {
 .home-nav-left-controls {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 1px;
 }
 
 /* Mobile hamburger button */
@@ -2395,10 +2463,10 @@ textarea {
 
   /* Clean crisp navbar header in responsive mode */
   .home-navbar {
-    padding: 10px 16px !important;
+    padding: 2px 12px !important;
     background: #ffffff !important;
     background-color: #ffffff !important;
-    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04) !important;
+    box-shadow: 0 1px 6px rgba(15, 23, 42, 0.04) !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
     border-bottom: 1px solid #f1f5f9 !important;
@@ -3906,8 +3974,8 @@ main.order-details-container,
 }
 
 .home-nav-container {
-  padding-top: 12px !important;
-  padding-bottom: 12px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3924,9 +3992,9 @@ main.order-details-container,
 }
 
 .home-brand-logo-wrapper {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
   background: #f0f9ff;
   border: 1px solid #bae6fd;
   display: flex;
@@ -3950,13 +4018,13 @@ main.order-details-container,
 
 .home-brand-name {
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   color: #0c4a6e;
   line-height: 1.2;
 }
 
 .home-brand-sub {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: #64748b;
   font-weight: 500;
 }
@@ -3980,10 +4048,10 @@ main.order-details-container,
 .home-nav-link {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-size: 0.9rem;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 0.88rem;
   font-weight: 600;
   color: #475569;
   text-decoration: none !important;
@@ -4019,7 +4087,7 @@ main.order-details-container,
 .home-nav-left-controls {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
 }
 
 /* --------------------------------------------------------------------------
@@ -4031,18 +4099,21 @@ main.order-details-container,
 
 .nav-bell-icon {
   position: relative;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
   color: #334155;
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
   cursor: pointer;
   outline: none !important;
+  padding: 0 !important;
+  text-decoration: none !important;
 }
 
 .nav-bell-icon::after {
@@ -4052,13 +4123,16 @@ main.order-details-container,
 .nav-bell-icon i {
   font-size: 1.15rem;
   color: #475569;
+  transition: color 0.2s ease;
 }
 
 .nav-bell-icon:hover,
 .notifications-dropdown-wrapper.show .nav-bell-icon {
-  background-color: #f0f9ff;
-  border-color: #0284c7 !important;
+  background-color: transparent !important;
+  border: none !important;
   color: #0284c7;
+  transform: scale(1.15);
+  text-decoration: none !important;
 }
 
 .nav-bell-icon:hover i,
@@ -4068,14 +4142,47 @@ main.order-details-container,
 
 .nav-bell-dot {
   position: absolute;
-  top: 7px;
-  right: 7px;
-  width: 10px;
-  height: 10px;
+  top: 3px;
+  right: 3px;
+  width: 7px;
+  height: 7px;
   background-color: #ef4444;
-  border: 2px solid #ffffff;
+  border: 1.5px solid #ffffff;
   border-radius: 50%;
   display: block;
+}
+
+.nav-cart-badge {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 1px 5px;
+  line-height: 1;
+}
+
+/* Notification card item on full notification page */
+.notif-card-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+  transition: all 0.2s ease;
+}
+
+.notif-card-item:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  transform: translateY(-1px);
+}
+
+.notif-card-item.unread-card {
+  border-right: 4px solid #0284c7 !important;
+  background: #fafdfe;
 }
 
 /* Dropdown Menu Popup */
