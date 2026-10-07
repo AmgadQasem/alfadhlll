@@ -116,11 +116,11 @@
       <div class="row g-3 py-3 mb-3 border-top border-bottom">
         <div class="col-6">
           <span class="text-muted fs-7 d-block mb-1">سعر الوحدة بدون الضريبة</span>
-          <div class="fw-bold text-dark fs-6">4,830.43 <small class="fw-normal fs-7">ريال</small></div>
+          <div class="fw-bold text-dark fs-6">4,830.43 <span class="sar-symbol"></span></div>
         </div>
         <div class="col-6 text-start">
           <span class="text-muted fs-7 d-block mb-1">الإجمالي شامل الضريبة</span>
-          <div class="fw-bold text-dark fs-5" id="confirmTotalVal">5,554.99 <small class="fw-normal fs-7">ر.س</small></div>
+          <div class="fw-bold text-dark fs-5" id="confirmTotalVal">5,554.99 <span class="sar-symbol"></span></div>
         </div>
       </div>
 
@@ -130,13 +130,24 @@
           <i class="fa-solid fa-circle-check"></i>
           <span>العمولة 7%</span>
         </span>
-        <span class="profit-rate-value" id="confirmCommissionVal">+ 388.85 ر.س</span>
+        <span class="profit-rate-value" id="confirmCommissionVal">+ 388.85 <span class="sar-symbol"></span></span>
+      </div>
+
+      <!-- Motivational Upsell Callout Box -->
+      <div class="p-3 rounded-3 mb-3 d-flex align-items-center justify-content-between flex-wrap gap-2" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-radius: 14px !important;">
+        <div class="d-flex align-items-center gap-2 fs-7 text-dark">
+          <i class="fa-solid fa-fire-flame-curved text-success fs-5"></i>
+          <span><strong>نصيحة زيادة الأرباح:</strong> إضافة قطعة أخرى يضاعف عمولتك من <strong class="text-success" id="singleProfitText">388.85 <span class="sar-symbol"></span></strong> إلى <strong class="text-success" id="doubleProfitText">777.70 <span class="sar-symbol"></span></strong>!</span>
+        </div>
+        <button type="button" class="btn btn-sm btn-success fw-bold px-3 py-1 rounded-2 fs-8" onclick="updateConfirmQty(1)">
+          + زيادة الكمية إلى 2
+        </button>
       </div>
 
       <!-- Total Return Footer -->
       <div class="d-flex align-items-center justify-content-between pt-1">
         <span class="text-muted fs-7 fw-semibold">إجمالي المسترد</span>
-        <span class="fw-bold text-dark fs-6" id="confirmReturnVal">5,943.84 ر.س</span>
+        <span class="fw-bold text-dark fs-6" id="confirmReturnVal">5,943.84 <span class="sar-symbol"></span></span>
       </div>
     </div>
 
@@ -147,11 +158,11 @@
         <h2 class="fs-6 fw-bold text-dark m-0">اختر وسيلة الدفع</h2>
       </div>
 
-      <!-- Option 1: حوالة بنكية -->
-      <div class="payment-option-card p-3 rounded-3 border mb-3 cursor-pointer" onclick="selectPayOption('bank')" style="border-radius: 14px !important; border-color: #e2e8f0;">
+      <!-- Option 1: حوالة بنكية (Default Selected) -->
+      <div class="payment-option-card p-3 rounded-3 border mb-3 cursor-pointer" id="bankOptionCard" onclick="selectPayOption('bank')" style="border: 2px solid #0f1f38 !important; background: #ffffff; border-radius: 14px !important;">
         <div class="d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center gap-3">
-            <input type="radio" name="payMethodRadio" id="payBankRadio" class="form-check-input mt-0" />
+            <input type="radio" name="payMethodRadio" id="payBankRadio" class="form-check-input mt-0" checked />
             <div>
               <h4 class="fs-6 fw-bold text-dark mb-0">حوالة بنكية</h4>
               <span class="text-muted fs-7">تحويل إلى حسابنا البنكي ثم ارفع الإيصال</span>
@@ -163,11 +174,11 @@
         </div>
       </div>
 
-      <!-- Option 2: بطاقة / مدى (MyFatoorah) (Active Default) -->
-      <div class="payment-option-card active p-3 rounded-3 border mb-4 cursor-pointer" id="fatoorahOptionCard" onclick="selectPayOption('fatoorah')" style="border: 2px solid #0f172a !important; background: #ffffff; border-radius: 14px !important;">
+      <!-- Option 2: بطاقة / مدى (MyFatoorah) -->
+      <div class="payment-option-card p-3 rounded-3 border mb-3 cursor-pointer" id="fatoorahOptionCard" onclick="selectPayOption('fatoorah')" style="border: 1px solid #e2e8f0 !important; background: #ffffff; border-radius: 14px !important;">
         <div class="d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center gap-3">
-            <input type="radio" name="payMethodRadio" id="payFatoorahRadio" class="form-check-input mt-0" checked />
+            <input type="radio" name="payMethodRadio" id="payFatoorahRadio" class="form-check-input mt-0" />
             <div>
               <h4 class="fs-6 fw-bold text-dark mb-0">بطاقة / مدى (MyFatoorah)</h4>
               <span class="text-muted fs-7">مدى، فيزا، ماستركارد - آمن ومباشر</span>
@@ -179,8 +190,53 @@
         </div>
       </div>
 
-      <!-- Notice Alert Box (Soft Green/Blue) -->
-      <div class="order-profit-rate-box mb-4" style="margin-top: 0 !important; font-weight: 500;">
+      <!-- Yellow Bank Transfer Instructions Box (Shown when Bank Transfer is selected) -->
+      <div id="bankInstructionsBox" class="p-4 rounded-4 mb-4" style="background: #fefce8; border: 1px solid #fef08a; border-radius: 16px !important;">
+        <div class="d-flex align-items-center gap-2 fw-bold text-dark fs-6 mb-2">
+          <i class="fa-solid fa-circle-info text-warning fs-5"></i>
+          <span>تعليمات الحوالة البنكية</span>
+        </div>
+        <p class="fs-7 text-muted mb-3">
+          حوّل مبلغ <strong class="text-dark font-monospace" id="bankTransferAmountText">5,554.99 <span class="sar-symbol"></span></strong> إلى الحساب التالي:
+        </p>
+
+        <div class="d-flex flex-column gap-2.5 mb-3 fs-7 text-dark">
+          <div class="d-flex align-items-center gap-2">
+            <i class="fa-solid fa-building-columns text-secondary"></i>
+            <span class="fw-bold">البنك:</span>
+            <span>مصرف الراجحي</span>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <div class="d-flex align-items-center gap-2">
+              <i class="fa-solid fa-hashtag text-secondary"></i>
+              <span class="fw-bold">الأيبان:</span>
+              <span class="font-monospace fw-bold" id="ibanNumber">SA6580000631608010696968</span>
+            </div>
+            <button type="button" class="btn btn-sm btn-light border py-1 px-2.5 rounded-2 text-dark fs-8 fw-bold" onclick="copyIbanText()">
+              <i class="fa-regular fa-copy me-1 text-primary"></i>
+              <span id="copyIbanBtnText">نسخ</span>
+            </button>
+          </div>
+
+          <div class="d-flex align-items-center gap-2">
+            <i class="fa-solid fa-user text-secondary"></i>
+            <span class="fw-bold">المستفيد:</span>
+            <span>شركة فضل المتحدة التجارية</span>
+          </div>
+        </div>
+
+        <!-- Inner Notice Banner -->
+        <div class="p-3 rounded-3" style="background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(234, 179, 8, 0.25); font-size: 12.5px; color: #713f12;">
+          <div class="d-flex align-items-start gap-2">
+            <i class="fa-solid fa-circle-info text-warning fs-6 mt-0.5"></i>
+            <span>بعد الحجز ستجد زر <strong>"رفع الإيصال"</strong> في صفحة تفاصيل الطلب. ستراجع الإدارة الإيصال وتعتمد الدفع خلال ساعات العمل.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MyFatoorah Notice Box (Hidden by default) -->
+      <div id="fatoorahNoticeBox" class="order-profit-rate-box mb-4 d-none" style="margin-top: 0 !important; font-weight: 500;">
         <div class="d-flex align-items-center gap-2 profit-rate-label" style="font-size: 13px !important; color: #166534 !important;">
           <i class="fa-solid fa-arrow-up-right-from-square"></i>
           <span><strong>الدفع الإلكتروني:</strong> بعد الحجز ستُحوّل لبوابة الدفع لإتمام العملية بشكل آمن.</span>
@@ -191,14 +247,14 @@
       <div class="form-check mb-4">
         <input class="form-check-input" type="checkbox" id="agreeTermsCheck" checked />
         <label class="form-check-label fs-7 text-dark fw-semibold" for="agreeTermsCheck">
-          أقر بأني قرأت وفهمت شروط الحجز والعمولة 7% وأوافق على المتابعة وفق <a href="contract.html" class="text-primary text-decoration-none">شروط الاستخدام</a>.
+          أقر بأني قرأت وفهمت شروط الحجز والعمولة 7% وأوافق على المتابعة وفق <a href="terms.html" class="text-primary text-decoration-none">شروط الاستخدام</a>.
         </label>
       </div>
 
-      <!-- Submit Action Button (Dark Navy) -->
-      <a href="orders.html" class="btn w-100 py-3 rounded-3 fw-bold fs-6 shadow-sm d-flex align-items-center justify-content-center gap-2" style="background: #0f172a; border: 1px solid #0f172a; color: #ffffff; border-radius: 12px !important;">
+      <!-- Submit Action Button -->
+      <a href="payment-receipt.html" id="submitPayBtn" class="btn w-100 py-3 rounded-3 fw-bold fs-6 shadow-sm d-flex align-items-center justify-content-center gap-2" style="background: #0f1f38; border: 1px solid #0f1f38; color: #ffffff; border-radius: 14px !important;">
         <i class="fa-solid fa-circle-check"></i>
-        <span id="submitPayBtnText">تأكيد الحجز بـ MyFatoorah</span>
+        <span id="submitPayBtnText">تأكيد الحجز بـ الحوالة البنكية</span>
       </a>
     </div>
 
@@ -244,28 +300,55 @@
       const commission = grandTotal * 0.07;
       const totalReturn = grandTotal + commission;
 
-      document.getElementById('confirmTotalVal').innerHTML = grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' <small class="fw-normal fs-7">ر.س</small>';
-      document.getElementById('confirmCommissionVal').textContent = '+ ' + commission.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ر.س';
-      document.getElementById('confirmReturnVal').textContent = totalReturn.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ر.س';
+      const formattedTotal = grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('confirmTotalVal').innerHTML = formattedTotal + ' <span class="sar-symbol"></span>';
+      document.getElementById('confirmCommissionVal').innerHTML = '+ ' + commission.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' <span class="sar-symbol"></span>';
+      document.getElementById('confirmReturnVal').innerHTML = totalReturn.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' <span class="sar-symbol"></span>';
+      
+      const bankAmountEl = document.getElementById('bankTransferAmountText');
+      if (bankAmountEl) bankAmountEl.innerHTML = formattedTotal + ' <span class="sar-symbol"></span>';
     }
 
     function selectPayOption(type) {
+      const bankCard = document.getElementById('bankOptionCard');
       const fatoorahCard = document.getElementById('fatoorahOptionCard');
       const bankRadio = document.getElementById('payBankRadio');
       const fatoorahRadio = document.getElementById('payFatoorahRadio');
+      const bankBox = document.getElementById('bankInstructionsBox');
+      const fatoorahBox = document.getElementById('fatoorahNoticeBox');
       const btnText = document.getElementById('submitPayBtnText');
+      const submitBtn = document.getElementById('submitPayBtn');
 
-      if (type === 'fatoorah') {
-        fatoorahRadio.checked = true;
-        bankRadio.checked = false;
-        if (fatoorahCard) fatoorahCard.style.border = '2px solid #0b1f3a';
-        if (btnText) btnText.textContent = 'تأكيد الحجز بـ MyFatoorah';
-      } else {
+      if (type === 'bank') {
         bankRadio.checked = true;
         fatoorahRadio.checked = false;
+        if (bankCard) bankCard.style.border = '2px solid #0f1f38';
         if (fatoorahCard) fatoorahCard.style.border = '1px solid #e2e8f0';
-        if (btnText) btnText.textContent = 'تأكيد الحجز بالحوالة البنكية';
+        if (bankBox) bankBox.classList.remove('d-none');
+        if (fatoorahBox) fatoorahBox.classList.add('d-none');
+        if (btnText) btnText.textContent = 'تأكيد الحجز بـ الحوالة البنكية';
+        if (submitBtn) submitBtn.href = 'payment-receipt.html';
+      } else {
+        fatoorahRadio.checked = true;
+        bankRadio.checked = false;
+        if (fatoorahCard) fatoorahCard.style.border = '2px solid #0f1f38';
+        if (bankCard) bankCard.style.border = '1px solid #e2e8f0';
+        if (fatoorahBox) fatoorahBox.classList.remove('d-none');
+        if (bankBox) bankBox.classList.add('d-none');
+        if (btnText) btnText.textContent = 'تأكيد الحجز بـ MyFatoorah';
+        if (submitBtn) submitBtn.href = 'orders.html';
       }
+    }
+
+    function copyIbanText() {
+      const iban = 'SA6580000631608010696968';
+      navigator.clipboard.writeText(iban).then(() => {
+        const btnText = document.getElementById('copyIbanBtnText');
+        if (btnText) {
+          btnText.textContent = 'تم النسخ!';
+          setTimeout(() => { btnText.textContent = 'نسخ'; }, 2000);
+        }
+      });
     }
   </script>
 </body>

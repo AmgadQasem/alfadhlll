@@ -91,7 +91,7 @@
 
           <!-- Item 1 -->
           <div class="cart-item-card" data-price="5888.00" data-commission="412.16">
-            <div class="d-flex align-items-start gap-3">
+            <div class="cart-item-inner d-flex align-items-start gap-3">
               <img src="../src/image/product_1 (3).webp" alt="iPhone 17 Pro Max" class="cart-item-img flex-shrink-0" />
               
               <div class="flex-grow-1">
@@ -117,9 +117,20 @@
 
                   <!-- Price & Commission -->
                   <div class="text-end">
-                    <div class="fw-bold text-dark fs-6 item-total-price">5,888.00 <small class="fw-normal fs-7">ر.س</small></div>
-                    <div class="text-success fs-7 fw-semibold item-commission-text">+ 412.16 ر.س عمولة</div>
+                    <div class="fw-bold text-dark fs-6 item-total-price">5,888.00 <span class="sar-symbol"></span></div>
+                    <div class="text-success fs-7 fw-semibold item-commission-text">+ 412.16 <span class="sar-symbol"></span> عمولة</div>
                   </div>
+                </div>
+
+                <!-- Motivational Quantity Upsell Strip -->
+                <div class="cart-item-upsell-strip">
+                  <span class="upsell-text">
+                    <i class="fa-solid fa-fire text-warning fs-7"></i>
+                    <span>زيادة الأرباح: أضف قطعة إضافية واحصل على <strong class="text-success fw-bold">+412.16 <span class="sar-symbol"></span></strong> عمولة إضافية!</span>
+                  </span>
+                  <button type="button" class="btn-upsell-add" onclick="boostQty(this)">
+                    <i class="fa-solid fa-plus me-0.5"></i> إضافة قطعة
+                  </button>
                 </div>
 
               </div>
@@ -128,7 +139,7 @@
 
           <!-- Item 2 -->
           <div class="cart-item-card" data-price="5554.99" data-commission="388.85">
-            <div class="d-flex align-items-start gap-3">
+            <div class="cart-item-inner d-flex align-items-start gap-3">
               <img src="../src/image/product_1 (2).webp" alt="iPhone 17 Pro" class="cart-item-img flex-shrink-0" />
               
               <div class="flex-grow-1">
@@ -154,9 +165,20 @@
 
                   <!-- Price & Commission -->
                   <div class="text-end">
-                    <div class="fw-bold text-dark fs-6 item-total-price">5,554.99 <small class="fw-normal fs-7">ر.س</small></div>
-                    <div class="text-success fs-7 fw-semibold item-commission-text">+ 388.85 ر.س عمولة</div>
+                    <div class="fw-bold text-dark fs-6 item-total-price">5,554.99 <span class="sar-symbol"></span></div>
+                    <div class="text-success fs-7 fw-semibold item-commission-text">+ 388.85 <span class="sar-symbol"></span> عمولة</div>
                   </div>
+                </div>
+
+                <!-- Motivational Quantity Upsell Strip -->
+                <div class="cart-item-upsell-strip">
+                  <span class="upsell-text">
+                    <i class="fa-solid fa-fire text-warning fs-7"></i>
+                    <span>زيادة الأرباح: أضف قطعة إضافية واحصل على <strong class="text-success fw-bold">+388.85 <span class="sar-symbol"></span></strong> عمولة إضافية!</span>
+                  </span>
+                  <button type="button" class="btn-upsell-add" onclick="boostQty(this)">
+                    <i class="fa-solid fa-plus me-0.5"></i> إضافة قطعة
+                  </button>
                 </div>
 
               </div>
@@ -181,6 +203,81 @@
 
           <span class="text-muted fs-7 fw-medium" id="cartItemsCountText">إجمالي المنتجات: 2</span>
         </div>
+
+        <!-- Motivational Recommended Upsell Products Section -->
+        <div class="card recommended-section-card p-4 mt-4 shadow-sm">
+          <div class="d-flex align-items-center justify-content-between mb-3.5 pb-2.5 border-bottom">
+            <div class="d-flex align-items-center gap-2.5">
+              <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 38px; height: 38px; background: #fffbe6; color: #d97706; border: 1px solid #fef3c7;">
+                <i class="fa-solid fa-lightbulb fs-5"></i>
+              </div>
+              <div>
+                <h4 class="fs-6 fw-bold text-dark m-0">منتجات مقترحة لزيادة أرباحك 💡</h4>
+                <span class="text-muted fs-8">أضف قطعة واحصل على عمولة بونص فورية بالسلة!</span>
+              </div>
+            </div>
+            <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle rounded-pill px-3 py-1.5 fs-8 fw-bold">عمولة مضاعفة 🔥</span>
+          </div>
+
+          <div class="row g-3">
+            <!-- Recommended Item 1: iPhone 17 Pro 1TB -->
+            <div class="col-12 col-sm-6">
+              <div class="recommended-product-card">
+                <div>
+                  <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="recommended-img-box">
+                      <img src="../src/image/product_1 (2).webp" alt="iPhone 17 Pro 1TB" />
+                    </div>
+                    <div class="flex-grow-1 overflow-hidden">
+                      <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2 py-0.5 fs-9 fw-semibold mb-1 d-inline-block">1TB · أزرق تيتانيوم</span>
+                      <h5 class="fs-7 fw-bold text-dark mb-1 text-truncate" title="iPhone 17 Pro 1TB">iPhone 17 Pro 1TB</h5>
+                      <div class="fw-extrabold text-dark fs-7">5,199.00 <span class="sar-symbol"></span></div>
+                    </div>
+                  </div>
+
+                  <div class="recommended-bonus-box">
+                    <span class="fw-medium"><i class="fa-solid fa-circle-check text-success me-1"></i> عمولة بونص:</span>
+                    <strong class="text-success fs-7 fw-extrabold">+ 363.93 <span class="sar-symbol"></span></strong>
+                  </div>
+                </div>
+
+                <button type="button" class="btn btn-recommended-action" onclick="addRecommendedToCart('iPhone 17 Pro 1TB أزرق تيتانيوم', '5199.00', '363.93', 'IP17PRO-1T-BLUE', '../src/image/product_1 (2).webp')">
+                  <i class="fa-solid fa-cart-plus"></i>
+                  <span>أضف للسلة وزد أرباحك</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Recommended Item 2: iPhone 17 Pro Max 512GB -->
+            <div class="col-12 col-sm-6">
+              <div class="recommended-product-card">
+                <div>
+                  <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="recommended-img-box">
+                      <img src="../src/image/product_1 (1).webp" alt="iPhone 17 Pro Max 512GB" />
+                    </div>
+                    <div class="flex-grow-1 overflow-hidden">
+                      <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2 py-0.5 fs-9 fw-semibold mb-1 d-inline-block">512GB · تيتانيوم طبيعي</span>
+                      <h5 class="fs-7 fw-bold text-dark mb-1 text-truncate" title="iPhone 17 Pro Max 512GB">iPhone 17 Pro Max 512GB</h5>
+                      <div class="fw-extrabold text-dark fs-7">5,499.00 <span class="sar-symbol"></span></div>
+                    </div>
+                  </div>
+
+                  <div class="recommended-bonus-box">
+                    <span class="fw-medium"><i class="fa-solid fa-circle-check text-success me-1"></i> عمولة بونص:</span>
+                    <strong class="text-success fs-7 fw-extrabold">+ 384.93 <span class="sar-symbol"></span></strong>
+                  </div>
+                </div>
+
+                <button type="button" class="btn btn-recommended-action" onclick="addRecommendedToCart('iPhone 17 Pro Max 512GB تيتانيوم طبيعي', '5499.00', '384.93', 'IP17PROMAX-512-NAT', '../src/image/product_1 (1).webp')">
+                  <i class="fa-solid fa-cart-plus"></i>
+                  <span>أضف للسلة وزد أرباحك</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- Left Column: Order Summary Card -->
@@ -195,12 +292,12 @@
           <!-- Summary Breakdown Rows -->
           <div class="d-flex align-items-center justify-content-between py-2 border-bottom fs-7">
             <span class="text-muted">مجموع سعر المنتجات (شامل الضريبة)</span>
-            <span class="fw-bold text-dark" id="summarySubtotal">11,442.99 ر.س</span>
+            <span class="fw-bold text-dark" id="summarySubtotal">11,442.99 <span class="sar-symbol"></span></span>
           </div>
 
           <div class="d-flex align-items-center justify-content-between py-2 border-bottom fs-7">
             <span class="text-muted">أرباح العمولة المستحقة (7%)</span>
-            <span class="fw-bold text-success" id="summaryCommission">+ 801.01 ر.س</span>
+            <span class="fw-bold text-success" id="summaryCommission">+ 801.01 <span class="sar-symbol"></span></span>
           </div>
 
           <!-- Highlight Profit Box -->
@@ -209,13 +306,13 @@
               <i class="fa-solid fa-circle-check"></i>
               <span>صافي الأرباح المتوقعة</span>
             </span>
-            <span class="profit-rate-value" id="summaryNetProfit">+ 801.01 ر.س</span>
+            <span class="profit-rate-value" id="summaryNetProfit">+ 801.01 <span class="sar-symbol"></span></span>
           </div>
 
           <!-- Grand Total Row -->
           <div class="d-flex align-items-center justify-content-between pt-2 pb-3">
             <span class="fw-bold text-dark fs-6">إجمالي المبلغ المحول لحسابك</span>
-            <span class="fw-bold text-primary fs-5" id="summaryGrandTotal">12,244.00 ر.س</span>
+            <span class="fw-bold text-primary fs-5" id="summaryGrandTotal">12,244.00 <span class="sar-symbol"></span></span>
           </div>
 
           <!-- Primary Action Button -->
@@ -316,10 +413,10 @@
         const commEl = card.querySelector('.item-commission-text');
 
         if (priceEl) {
-          priceEl.innerHTML = itemTotalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' <small class="fw-normal fs-7">ر.س</small>';
+          priceEl.innerHTML = itemTotalPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' <span class="sar-symbol"></span>';
         }
         if (commEl) {
-          commEl.textContent = '+ ' + itemCommTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ر.س عمولة';
+          commEl.innerHTML = '+ ' + itemCommTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' <span class="sar-symbol"></span> عمولة';
         }
       });
 
@@ -328,10 +425,10 @@
       if (navBadge) navBadge.textContent = cards.length;
       if (itemsCountText) itemsCountText.textContent = 'إجمالي المنتجات: ' + cards.length + ' (' + totalQtyCount + ' قطعة)';
 
-      document.getElementById('summarySubtotal').textContent = grandProductTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ر.س';
-      document.getElementById('summaryCommission').textContent = '+ ' + grandCommissionTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ر.س';
-      document.getElementById('summaryNetProfit').textContent = '+ ' + grandCommissionTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ر.س';
-      document.getElementById('summaryGrandTotal').textContent = grandTotalReturn.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ر.س';
+      document.getElementById('summarySubtotal').innerHTML = grandProductTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' <span class="sar-symbol"></span>';
+      document.getElementById('summaryCommission').innerHTML = '+ ' + grandCommissionTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' <span class="sar-symbol"></span>';
+      document.getElementById('summaryNetProfit').innerHTML = '+ ' + grandCommissionTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' <span class="sar-symbol"></span>';
+      document.getElementById('summaryGrandTotal').innerHTML = grandTotalReturn.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' <span class="sar-symbol"></span>';
     }
 
     function updateQty(btn, delta) {
@@ -341,6 +438,16 @@
       current = Math.max(1, current + delta);
       qtySpan.textContent = current;
       updateCartTotals();
+    }
+
+    function boostQty(btn) {
+      const card = btn.closest('.cart-item-card');
+      if (card) {
+        const qtySpan = card.querySelector('.item-qty-val');
+        let current = parseInt(qtySpan.textContent || 1);
+        qtySpan.textContent = current + 1;
+        updateCartTotals();
+      }
     }
 
     function removeItem(btn) {
@@ -361,6 +468,56 @@
         document.querySelectorAll('.cart-item-card').forEach(c => c.remove());
         updateCartTotals();
       }
+    }
+
+    function addRecommendedToCart(title, price, commission, sku, img) {
+      const list = document.getElementById('cartItemsList');
+      if (!list) return;
+
+      const newItemHtml = `
+        <div class="cart-item-card" data-price="${price}" data-commission="${commission}">
+          <div class="cart-item-inner d-flex align-items-start gap-3">
+            <img src="${img}" alt="${title}" class="cart-item-img flex-shrink-0" />
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-start justify-content-between gap-2 mb-1">
+                <h3 class="fs-6 fw-bold text-dark mb-0">${title}</h3>
+                <button type="button" class="btn btn-link text-danger p-0 border-0 fs-6 remove-item-btn" onclick="removeItem(this)" title="حذف المنتج">
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </div>
+              <div class="text-muted fs-7 mb-2">
+                <span class="badge bg-success-subtle text-success border border-success-subtle me-1">+ عمولة بونص</span>
+                <span>SKU: ${sku}</span>
+              </div>
+              <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-2 border-top">
+                <div class="d-inline-flex align-items-center border rounded-3 p-1 bg-light">
+                  <button type="button" class="btn btn-sm btn-white border-0 px-2 fw-bold text-dark" onclick="updateQty(this, -1)">-</button>
+                  <span class="fw-bold px-3 text-dark item-qty-val">1</span>
+                  <button type="button" class="btn btn-sm btn-white border-0 px-2 fw-bold text-dark" onclick="updateQty(this, 1)">+</button>
+                </div>
+                <div class="text-end">
+                  <div class="fw-bold text-dark fs-6 item-total-price">${parseFloat(price).toLocaleString('en-US', {minimumFractionDigits: 2})} <span class="sar-symbol"></span></div>
+                  <div class="text-success fs-7 fw-semibold item-commission-text">+ ${parseFloat(commission).toLocaleString('en-US', {minimumFractionDigits: 2})} <span class="sar-symbol"></span> عمولة</div>
+                </div>
+              </div>
+              <div class="cart-item-upsell-strip">
+                <span class="upsell-text">
+                  <i class="fa-solid fa-fire text-warning fs-7"></i>
+                  <span>زيادة الأرباح: أضف قطعة إضافية واحصل على <strong class="text-success fw-bold">+${parseFloat(commission).toLocaleString('en-US', {minimumFractionDigits: 2})} <span class="sar-symbol"></span></strong> عمولة إضافية!</span>
+                </span>
+                <button type="button" class="btn-upsell-add" onclick="boostQty(this)">
+                  <i class="fa-solid fa-plus me-0.5"></i> إضافة قطعة
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      list.insertAdjacentHTML('beforeend', newItemHtml);
+      updateCartTotals();
+
+      alert(`🎉 رائع! تم إضافة "${title}" بنجاح إلى السلة.\nارتفعت أرباحك وعمولتك المتوقعة بمقدار +${commission} ريال!`);
     }
 
     document.addEventListener('DOMContentLoaded', function() {

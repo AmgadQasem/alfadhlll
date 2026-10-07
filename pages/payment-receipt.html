@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الدفع ورفع الإيصال - منصة الفضل للاتصالات</title>
+
+  <!-- Google Fonts Readex Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 Pro / Free CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="../css/font-awesome-pro.css?v=1.1" />
+
+  <!-- Bootstrap 5.3.3 RTL CDN & Local Fallback -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" />
+  <link rel="stylesheet" href="../css/bootstrap.min.css?v=1.1" />
+
+  <!-- Custom Shared Styles -->
+  <link rel="stylesheet" href="../css/style.css?v=6.0" />
+  <style>
+    body {
+      background-color: #f1f5f9;
+      font-family: 'Readex Pro', system-ui, sans-serif;
+    }
+    .payment-receipt-container {
+      max-width: 680px !important;
+      margin: 24px auto 60px !important;
+      padding: 0 16px;
+    }
+    .stepper-pill {
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .stepper-pill.done {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #86efac;
+    }
+    .stepper-pill.active {
+      background: #0f1f38;
+      color: #ffffff;
+    }
+    .stepper-pill.pending {
+      background: #ffffff;
+      color: #94a3b8;
+      border: 1px solid #e2e8f0;
+    }
+    .bank-card-option {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .bank-card-option:hover {
+      border-color: #0284c7;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08);
+    }
+    .bank-card-option.selected {
+      border: 2px solid #0284c7 !important;
+      background: #ffffff !important;
+      box-shadow: 0 4px 16px rgba(2, 132, 199, 0.12);
+    }
+    .upload-drag-zone {
+      border: 2px dashed #bae6fd;
+      background: #f0f9ff;
+      border-radius: 16px;
+      padding: 32px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .upload-drag-zone:hover,
+    .upload-drag-zone.dragover {
+      border-color: #0284c7;
+      background: #e0f2fe;
+    }
+  </style>
+</head>
+<body class="home-page-body">
+
+  <!-- Top Navbar -->
+  <nav class="home-navbar" id="homeNavbar">
+    <div class="home-nav-container">
+      <!-- RIGHT: Brand Logo & Title -->
+      <a href="home.html" class="home-nav-brand">
+        <div class="home-brand-logo-wrapper">
+          <img src="../src/image/logo.webp" alt="الفضل للاتصالات" />
+        </div>
+        <div class="home-brand-text-col">
+          <span class="home-brand-name">الفضل للاتصالات</span>
+          <span class="home-brand-sub">بوابة العملاء المعتمدة</span>
+        </div>
+      </a>
+
+      <!-- CENTER: Nav Links -->
+      <ul class="home-nav-links">
+        <li><a href="home.html" class="home-nav-link"><i class="fa-solid fa-house-chimney"></i><span>لوحتي</span></a></li>
+        <li><a href="booking.html" class="home-nav-link active"><i class="fa-solid fa-calendar-check"></i><span>الحجز</span></a></li>
+        <li><a href="orders.html" class="home-nav-link"><i class="fa-solid fa-box"></i><span>طلباتي</span></a></li>
+        <li><a href="account.html" class="home-nav-link"><i class="fa-solid fa-wallet"></i><span>حسابي</span></a></li>
+        <li><a href="profile.html" class="home-nav-link"><i class="fa-solid fa-user-gear"></i><span>ملفي</span></a></li>
+      </ul>
+
+      <!-- LEFT: Controls -->
+      <div class="home-nav-left-controls">
+        <a href="cart.html" class="nav-bell-icon text-decoration-none border-0 p-0 position-relative" title="سلة التسوق">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="nav-cart-badge">2</span>
+        </a>
+        <a href="notifications.html" class="nav-bell-icon text-decoration-none border-0 p-0 position-relative" title="الإشعارات">
+          <i class="fa-regular fa-bell"></i>
+          <span class="nav-bell-dot"></span>
+        </a>
+        <a href="../index.html" class="nav-logout-icon" title="تسجيل الخروج">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTAINER -->
+  <main class="payment-receipt-container">
+
+    <!-- Top 4-Step Stepper Header -->
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-4 bg-white p-2.5 rounded-4 border shadow-xs">
+      <span class="stepper-pill done">
+        <i class="fa-solid fa-check"></i>
+        <span>1. الحجز</span>
+      </span>
+      <span class="stepper-pill done">
+        <i class="fa-solid fa-check"></i>
+        <span>2. العقد</span>
+      </span>
+      <span class="stepper-pill active">
+        <i class="fa-solid fa-credit-card"></i>
+        <span>3. الدفع</span>
+      </span>
+      <span class="stepper-pill pending">
+        <span>4. الاستلام</span>
+      </span>
+    </div>
+
+    <!-- Order Summary Card Banner -->
+    <div class="card border rounded-4 bg-white p-4 shadow-sm mb-4" style="border-color: #e2e8f0; border-radius: 18px !important;">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pb-3 mb-2 border-bottom">
+        <div>
+          <span class="text-muted fs-7 d-block mb-1">رقم الطلب</span>
+          <span class="badge bg-light text-dark font-monospace border px-2.5 py-1 fs-7">
+            ALF-20261005-296E5
+          </span>
+        </div>
+        <div class="text-start">
+          <span class="text-muted fs-7 d-block mb-1">المبلغ المطلوب</span>
+          <div class="fw-bold text-dark fs-4" style="letter-spacing: -0.3px;">
+            5,554.99 <span class="sar-symbol" aria-label="ر.س"></span>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex align-items-center gap-2 text-muted fs-7 pt-1">
+        <i class="fa-solid fa-mobile-screen-button text-primary"></i>
+        <span>Apple iPhone 17 Pro 1T أزرق داكن | 1 قطعة</span>
+      </div>
+    </div>
+
+    <!-- Bank Accounts Selection Card -->
+    <div class="card border rounded-4 bg-white p-4 shadow-sm mb-4" style="border-color: #e2e8f0; border-radius: 18px !important;">
+      <div class="d-flex align-items-center gap-2 pb-3 mb-2 border-bottom">
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width: 28px; height: 28px; font-size: 13px;">
+          3
+        </div>
+        <h2 class="fs-6 fw-bold text-dark m-0">حوّل المبلغ للحساب التالي</h2>
+      </div>
+
+      <p class="text-muted fs-7 mb-3">اختر الحساب البنكي الذي سترسل إليه الحوالة:</p>
+
+      <!-- 6 Bank Cards List -->
+      <div class="d-flex flex-column gap-2 mb-3">
+
+        <!-- Bank 1: مصرف الراجحي (Default Selected) -->
+        <div class="bank-card-option selected" id="bankCard1" onclick="selectBankCard(1)">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div class="d-flex align-items-center gap-2 fw-bold text-dark fs-6">
+              <input type="radio" name="bankSelectRadio" id="bankRadio1" checked class="form-check-input mt-0 me-1" />
+              <span>مصرف الراجحي</span>
+            </div>
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2.5 py-1 rounded-pill fs-8">الحساب الرئيسي</span>
+          </div>
+
+          <div class="d-flex flex-column gap-2 fs-7 text-dark ps-4">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <div><i class="fa-solid fa-building-columns text-secondary me-2"></i><span class="text-muted">البنك:</span> <span class="fw-bold">مصرف الراجحي</span></div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <div><i class="fa-solid fa-hashtag text-secondary me-2"></i><span class="text-muted">الأيبان IBAN:</span> <span class="font-monospace fw-bold">SA6580000631608010696968</span></div>
+              <button type="button" class="btn btn-sm btn-light border py-1 px-2.5 rounded-2 fs-8 fw-bold" onclick="copyText('SA6580000631608010696968', event)">
+                <i class="fa-regular fa-copy me-1 text-primary"></i> نسخ
+              </button>
+            </div>
+            <div><i class="fa-solid fa-user text-secondary me-2"></i><span class="text-muted">المستفيد:</span> <span class="fw-bold">شركة فضل المتحدة التجارية</span></div>
+            <div><i class="fa-solid fa-credit-card text-secondary me-2"></i><span class="text-muted">رقم الحساب:</span> <span class="font-monospace">631608010696968</span></div>
+          </div>
+        </div>
+
+        <!-- Bank 2: البنك الأهلي السعودي -->
+        <div class="bank-card-option" id="bankCard2" onclick="selectBankCard(2)">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <div class="d-flex align-items-center gap-2 fw-bold text-dark fs-6">
+              <input type="radio" name="bankSelectRadio" id="bankRadio2" class="form-check-input mt-0 me-1" />
+              <span>البنك الأهلي السعودي (SNB)</span>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column gap-2 fs-7 text-dark ps-4">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <div><i class="fa-solid fa-building-columns text-secondary me-2"></i><span class="text-muted">البنك:</span> <span class="fw-bold">البنك الأهلي السعودي</span></div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <div><i class="fa-solid fa-hashtag text-secondary me-2"></i><span class="text-muted">الأيبان IBAN:</span> <span class="font-monospace fw-bold">SA5110000041200000274709</span></div>
+              <button type="button" class="btn btn-sm btn-light border py-1 px-2.5 rounded-2 fs-8 fw-bold" onclick="copyText('SA5110000041200000274709', event)">
+                <i class="fa-regular fa-copy me-1 text-primary"></i> نسخ
+              </button>
+            </div>
+            <div><i class="fa-solid fa-user text-secondary me-2"></i><span class="text-muted">المستفيد:</span> <span class="fw-bold">شركة فضل المتحدة التجارية</span></div>
+            <div><i class="fa-solid fa-credit-card text-secondary me-2"></i><span class="text-muted">رقم الحساب:</span> <span class="font-monospace">41200000274709</span></div>
+          </div>
+        </div>
+
+        <!-- Bank 3: بنك الجزيرة -->
+        <div class="bank-card-option" id="bankCard3" onclick="selectBankCard(3)">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <div class="d-flex align-items-center gap-2 fw-bold text-dark fs-6">
+              <input type="radio" name="bankSelectRadio" id="bankRadio3" class="form-check-input mt-0 me-1" />
+              <span>بنك الجزيرة</span>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column gap-2 fs-7 text-dark ps-4">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <div><i class="fa-solid fa-building-columns text-secondary me-2"></i><span class="text-muted">البنك:</span> <span class="fw-bold">بنك الجزيرة</span></div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <div><i class="fa-solid fa-hashtag text-secondary me-2"></i><span class="text-muted">الأيبان IBAN:</span> <span class="font-monospace fw-bold">SA10601000023702145430901</span></div>
+              <button type="button" class="btn btn-sm btn-light border py-1 px-2.5 rounded-2 fs-8 fw-bold" onclick="copyText('SA10601000023702145430901', event)">
+                <i class="fa-regular fa-copy me-1 text-primary"></i> نسخ
+              </button>
+            </div>
+            <div><i class="fa-solid fa-user text-secondary me-2"></i><span class="text-muted">المستفيد:</span> <span class="fw-bold">شركة فضل المتحدة التجارية</span></div>
+          </div>
+        </div>
+
+        <!-- Bank 4: بنك البلاد -->
+        <div class="bank-card-option" id="bankCard4" onclick="selectBankCard(4)">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <div class="d-flex align-items-center gap-2 fw-bold text-dark fs-6">
+              <input type="radio" name="bankSelectRadio" id="bankRadio4" class="form-check-input mt-0 me-1" />
+              <span>بنك البلاد</span>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column gap-2 fs-7 text-dark ps-4">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <div><i class="fa-solid fa-building-columns text-secondary me-2"></i><span class="text-muted">البنك:</span> <span class="fw-bold">بنك البلاد</span></div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <div><i class="fa-solid fa-hashtag text-secondary me-2"></i><span class="text-muted">الأيبان IBAN:</span> <span class="font-monospace fw-bold">SA90C50090603205721254690</span></div>
+              <button type="button" class="btn btn-sm btn-light border py-1 px-2.5 rounded-2 fs-8 fw-bold" onclick="copyText('SA90C50090603205721254690', event)">
+                <i class="fa-regular fa-copy me-1 text-primary"></i> نسخ
+              </button>
+            </div>
+            <div><i class="fa-solid fa-user text-secondary me-2"></i><span class="text-muted">المستفيد:</span> <span class="fw-bold">شركة فضل المتحدة التجارية</span></div>
+          </div>
+        </div>
+
+        <!-- Bank 5: البنك السعودي الفرنسي -->
+        <div class="bank-card-option" id="bankCard5" onclick="selectBankCard(5)">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <div class="d-flex align-items-center gap-2 fw-bold text-dark fs-6">
+              <input type="radio" name="bankSelectRadio" id="bankRadio5" class="form-check-input mt-0 me-1" />
+              <span>البنك السعودي الفرنسي</span>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column gap-2 fs-7 text-dark ps-4">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <div><i class="fa-solid fa-building-columns text-secondary me-2"></i><span class="text-muted">البنك:</span> <span class="fw-bold">البنك السعودي الفرنسي</span></div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <div><i class="fa-solid fa-hashtag text-secondary me-2"></i><span class="text-muted">الأيبان IBAN:</span> <span class="font-monospace fw-bold">SA62550000006922961400173</span></div>
+              <button type="button" class="btn btn-sm btn-light border py-1 px-2.5 rounded-2 fs-8 fw-bold" onclick="copyText('SA62550000006922961400173', event)">
+                <i class="fa-regular fa-copy me-1 text-primary"></i> نسخ
+              </button>
+            </div>
+            <div><i class="fa-solid fa-user text-secondary me-2"></i><span class="text-muted">المستفيد:</span> <span class="fw-bold">شركة فضل المتحدة التجارية</span></div>
+          </div>
+        </div>
+
+        <!-- Bank 6: بنك الرياض -->
+        <div class="bank-card-option" id="bankCard6" onclick="selectBankCard(6)">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <div class="d-flex align-items-center gap-2 fw-bold text-dark fs-6">
+              <input type="radio" name="bankSelectRadio" id="bankRadio6" class="form-check-input mt-0 me-1" />
+              <span>بنك الرياض</span>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column gap-2 fs-7 text-dark ps-4">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <div><i class="fa-solid fa-building-columns text-secondary me-2"></i><span class="text-muted">البنك:</span> <span class="fw-bold">بنك الرياض</span></div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <div><i class="fa-solid fa-hashtag text-secondary me-2"></i><span class="text-muted">الأيبان IBAN:</span> <span class="font-monospace fw-bold">SA0720000024220308881940</span></div>
+              <button type="button" class="btn btn-sm btn-light border py-1 px-2.5 rounded-2 fs-8 fw-bold" onclick="copyText('SA0720000024220308881940', event)">
+                <i class="fa-regular fa-copy me-1 text-primary"></i> نسخ
+              </button>
+            </div>
+            <div><i class="fa-solid fa-user text-secondary me-2"></i><span class="text-muted">المستفيد:</span> <span class="fw-bold">شركة فضل المتحدة التجارية</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Amount Strip -->
+      <div class="p-3 rounded-3 bg-light border d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <div class="d-flex align-items-center gap-2 text-dark fs-7">
+          <i class="fa-solid fa-wallet text-primary"></i>
+          <span>المبلغ المطلوب: <strong class="font-monospace fs-6">5,554.99 <span class="sar-symbol" aria-label="ر.س"></span></strong></span>
+        </div>
+        <button type="button" class="btn btn-sm btn-white border px-3 py-1 rounded-2 text-dark fs-8 fw-bold" onclick="copyText('5554.99', event)">
+          <i class="fa-regular fa-copy me-1 text-primary"></i> نسخ المبلغ
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Upload Receipt Card -->
+    <div class="card border rounded-4 bg-white p-4 shadow-sm mb-4" style="border-color: #e2e8f0; border-radius: 18px !important;">
+      <div class="d-flex align-items-center gap-2 pb-3 mb-3 border-bottom">
+        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center fw-bold" style="width: 28px; height: 28px; font-size: 13px;">
+          4
+        </div>
+        <h2 class="fs-6 fw-bold text-dark m-0">ارفع إيصال الحوالة بعد التحويل</h2>
+      </div>
+
+      <!-- Upload Drop Zone -->
+      <div class="upload-drag-zone mb-3" onclick="triggerFileInput()" id="dropZone">
+        <input type="file" id="receiptFileInput" class="d-none" accept="image/*,.pdf" onchange="handleFileSelect(event)" />
+        <div class="rounded-circle bg-sky-subtle text-primary d-inline-flex align-items-center justify-content-center mb-3" style="width: 54px; height: 54px; background: #e0f2fe; color: #0284c7;">
+          <i class="fa-solid fa-cloud-arrow-up fs-4"></i>
+        </div>
+        <h3 class="fs-6 fw-bold text-dark mb-1" id="fileTitleText">اسحب الإيصال هنا أو اضغط للاختيار</h3>
+        <span class="text-muted fs-8 d-block" id="fileSubText">صورة أو PDF — الحد الأقصى 5MB</span>
+      </div>
+
+      <!-- Notice Alert Below Upload -->
+      <div class="p-3 rounded-3 mb-4" style="background: #f8fafc; border: 1px solid #e2e8f0; font-size: 12px; color: #475569;">
+        <div class="d-flex align-items-start gap-2">
+          <i class="fa-solid fa-circle-info text-primary fs-6 mt-0.5"></i>
+          <span>بعد الرفع ستراجع الإدارة الإيصال وتعتمد الدفع على حسابك وتصلك رسالة خلال ساعات العمل.</span>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="button" class="btn w-100 py-3 rounded-3 fw-bold text-white shadow-sm d-flex align-items-center justify-content-center gap-2" id="submitReceiptBtn" style="background: #64748b; border: none; border-radius: 12px !important;" onclick="submitReceiptProcess()">
+        <i class="fa-solid fa-cloud-arrow-up fs-5"></i>
+        <span>رفع الإيصال للمراجعة</span>
+      </button>
+
+    </div>
+
+    <!-- Navigation Footer Links -->
+    <div class="d-flex align-items-center justify-content-between text-muted fs-7 px-2">
+      <a href="order-pending-payment.html" class="text-muted text-decoration-none hover-primary"><i class="fa-solid fa-arrow-right me-1"></i> تفاصيل الطلب</a>
+      <a href="orders.html" class="text-muted text-decoration-none hover-primary"><i class="fa-solid fa-boxes-stacked me-1"></i> كل طلباتي</a>
+    </div>
+
+  </main>
+
+  <!-- Mobile Bottom Nav -->
+  <div class="mobile-bottom-nav">
+    <a href="home.html" class="mobile-nav-item">
+      <div class="mobile-nav-icon-wrap"><i class="fa-solid fa-house"></i></div>
+      <span>لوحتي</span>
+    </a>
+    <a href="booking.html" class="mobile-nav-item active">
+      <div class="mobile-nav-icon-wrap"><i class="fa-solid fa-calendar-check"></i></div>
+      <span>الحجز</span>
+    </a>
+    <a href="orders.html" class="mobile-nav-item mobile-nav-center">
+      <div class="mobile-nav-center-circle"><i class="fa-solid fa-box"></i></div>
+      <span>طلباتي</span>
+    </a>
+    <a href="account.html" class="mobile-nav-item">
+      <div class="mobile-nav-icon-wrap"><i class="fa-solid fa-wallet"></i></div>
+      <span>حسابي</span>
+    </a>
+    <a href="profile.html" class="mobile-nav-item">
+      <div class="mobile-nav-icon-wrap"><i class="fa-solid fa-user"></i></div>
+      <span>ملفي</span>
+    </a>
+  </div>
+
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/script.js?v=2.6"></script>
+  <script>
+    function selectBankCard(index) {
+      for (let i = 1; i <= 6; i++) {
+        const card = document.getElementById('bankCard' + i);
+        const radio = document.getElementById('bankRadio' + i);
+        if (card && radio) {
+          if (i === index) {
+            card.classList.add('selected');
+            radio.checked = true;
+          } else {
+            card.classList.remove('selected');
+            radio.checked = false;
+          }
+        }
+      }
+    }
+
+    function copyText(str, e) {
+      if (e) e.stopPropagation();
+      navigator.clipboard.writeText(str).then(() => {
+        alert('تم نسخ الرقم بنجاح: ' + str);
+      });
+    }
+
+    function triggerFileInput() {
+      document.getElementById('receiptFileInput').click();
+    }
+
+    function handleFileSelect(event) {
+      const file = event.target.files[0];
+      if (file) {
+        document.getElementById('fileTitleText').textContent = 'تم اختيار الملف: ' + file.name;
+        document.getElementById('fileSubText').textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB — جاهز للرفع';
+        const btn = document.getElementById('submitReceiptBtn');
+        btn.style.background = '#0284c7';
+      }
+    }
+
+    function submitReceiptProcess() {
+      const fileInput = document.getElementById('receiptFileInput');
+      if (!fileInput.files || fileInput.files.length === 0) {
+        alert('يرجى اختيار ملف الإيصال أولاً قبل الضغط على زر الرفع');
+        triggerFileInput();
+        return;
+      }
+      alert('تم رفع إيصال الحوالة بنجاح! ستراجع الإدارة الإيصال وتعتمد الطلب خلال ساعات العمل.');
+      window.location.href = 'order-pending-payment.html';
+    }
+  </script>
+</body>
+</html>

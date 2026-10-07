@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const imgSrc = this.getAttribute('data-img') || './src/image/product_1 (1).webp';
 
       if (tagEl) tagEl.textContent = name;
-      if (priceTagEl) priceTagEl.textContent = formatCurrency(activePrice) + ' ريال';
+      if (priceTagEl) priceTagEl.innerHTML = formatCurrency(activePrice) + ' <span class="sar-symbol"></span>';
 
       if (previewImg && previewImg.getAttribute('src') !== imgSrc) {
         previewImg.classList.add('is-swapping');
